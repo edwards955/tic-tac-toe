@@ -47,45 +47,42 @@ const GameController = () => {
     const getCurrentPlayer = () => currentPlayer;
 
     const playRound = (x, y) => {
-        if (board.getBoard()[x][y] === '') {
-            board.markBoard(getCurrentPlayer().getMarker(), x, y);
-            changePlayerTurn();
-        } else {
+        if (board.getBoard()[x][y] !== '') {
             alert('This position is already filled. Choose another!');
+            return;
         }
+        board.markBoard(getCurrentPlayer().getMarker(), x, y);
+        let gameOver = checkForWinner(getCurrentPlayer().getMarker());
+        if (gameOver === true) {
+            alert(`${getCurrentPlayer().getName()} wins!`);
+            return;
+        }
+        changePlayerTurn();
     }
 
-    const checkForWinner = () => {
-        if (board.getBoard()[0][0] === board.getBoard()[0][1]
-            && board.getBoard()[0][1] === board.getBoard()[0][2]) {
+    const checkForWinner = (mark) => {
+        if (board.getBoard()[0][0] === mark && board.getBoard()[0][1] === mark && board.getBoard()[0][2] === mark) {
             return true;
         }
-        else if (board.getBoard()[1][0] === board.getBoard()[1][1]
-            && board.getBoard()[1][1] === board.getBoard()[1][2]) {
+        else if (board.getBoard()[1][0] === mark && board.getBoard()[1][1] === mark && board.getBoard()[1][2] === mark) {
             return true;
         }
-        else if (board.getBoard()[2][0] === board.getBoard()[2][1]
-            && board.getBoard()[2][1] === board.getBoard()[2][2]) {
+        else if (board.getBoard()[2][0] === mark && board.getBoard()[2][1] === mark && board.getBoard()[2][2] === mark) {
             return true;
         }
-        else if (board.getBoard()[0][0] === board.getBoard()[1][0]
-            && board.getBoard()[1][0] === board.getBoard()[2][0]) {
+        else if (board.getBoard()[0][0] === mark && board.getBoard()[1][0] === mark && board.getBoard()[2][0] === mark) {
             return true;
         }
-        else if (board.getBoard()[0][1] === board.getBoard()[1][1]
-            && board.getBoard()[1][1] === board.getBoard()[2][1]) {
+        else if (board.getBoard()[0][1] === mark && board.getBoard()[1][1] === mark && board.getBoard()[2][1] === mark) {
             return true;
         }
-        else if (board.getBoard()[0][2] === board.getBoard()[1][2]
-            && board.getBoard()[1][2] === board.getBoard()[2][2]) {
+        else if (board.getBoard()[0][2] === mark && board.getBoard()[1][2] === mark && board.getBoard()[2][2] === mark) {
             return true;
         }
-        else if (board.getBoard()[0][0] === board.getBoard()[1][1]
-            && board.getBoard()[1][1] === board.getBoard()[2][2]) {
+        else if (board.getBoard()[0][0] === mark && board.getBoard()[1][1] === mark && board.getBoard()[2][2] === mark) {
             return true;
         }
-        else if (board.getBoard()[0][2] === board.getBoard()[1][1]
-            && board.getBoard()[1][1] === board.getBoard()[2][0]) {
+        else if (board.getBoard()[0][2] === mark && board.getBoard()[1][1] === mark && board.getBoard()[2][0] === mark) {
             return true;
         } else {
             return false;
