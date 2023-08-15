@@ -8,10 +8,12 @@ const Player = (name, marker) => {
 
 const GameBoard = () => {
     const board = [
-        ['X', 'O', 'X'],
-        ['X', 'X', 'O'],
-        ['O', 'O', 'X']
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
     ]
+
+    const getBoard = () => board;
 
     const markBoard = (marker, x, y) => {
         board[x][y] = marker;
@@ -28,7 +30,7 @@ const GameBoard = () => {
         }
     }
 
-    return {markBoard, updateBoard};
+    return {markBoard, updateBoard, getBoard};
 };
 
 const GameController = () => {
@@ -45,8 +47,12 @@ const GameController = () => {
     const getCurrentPlayer = () => currentPlayer;
 
     const playRound = (x, y) => {
-        board.markBoard(getCurrentPlayer().getMarker(), x, y);
-        changePlayerTurn();
+        if (board.getBoard()[x][y] === '') {
+            board.markBoard(getCurrentPlayer().getMarker(), x, y);
+            changePlayerTurn();
+        } else {
+            alert('This position is already filled. Choose another!');
+        }
     }
 
     return {getCurrentPlayer, playRound}
