@@ -55,6 +55,43 @@ const GameController = () => {
         }
     }
 
+    const checkForWinner = () => {
+        if (board.getBoard()[0][0] === board.getBoard()[0][1]
+            && board.getBoard()[0][1] === board.getBoard()[0][2]) {
+            return true;
+        }
+        else if (board.getBoard()[1][0] === board.getBoard()[1][1]
+            && board.getBoard()[1][1] === board.getBoard()[1][2]) {
+            return true;
+        }
+        else if (board.getBoard()[2][0] === board.getBoard()[2][1]
+            && board.getBoard()[2][1] === board.getBoard()[2][2]) {
+            return true;
+        }
+        else if (board.getBoard()[0][0] === board.getBoard()[1][0]
+            && board.getBoard()[1][0] === board.getBoard()[2][0]) {
+            return true;
+        }
+        else if (board.getBoard()[0][1] === board.getBoard()[1][1]
+            && board.getBoard()[1][1] === board.getBoard()[2][1]) {
+            return true;
+        }
+        else if (board.getBoard()[0][2] === board.getBoard()[1][2]
+            && board.getBoard()[1][2] === board.getBoard()[2][2]) {
+            return true;
+        }
+        else if (board.getBoard()[0][0] === board.getBoard()[1][1]
+            && board.getBoard()[1][1] === board.getBoard()[2][2]) {
+            return true;
+        }
+        else if (board.getBoard()[0][2] === board.getBoard()[1][1]
+            && board.getBoard()[1][1] === board.getBoard()[2][0]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return {getCurrentPlayer, playRound}
 }
 
